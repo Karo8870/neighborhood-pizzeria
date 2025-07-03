@@ -70,7 +70,7 @@ public partial class Player : CharacterBody3D
 				_velocity.Y = 0;
 			}
 		}
-		
+
 		Velocity = _velocity;
 		MoveAndSlide();
 	}
