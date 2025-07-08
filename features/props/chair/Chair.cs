@@ -6,7 +6,7 @@ namespace neighborhoodPizzeria;
 /// <summary>
 /// Example of a 3D object that implements hover and click callbacks.
 /// </summary>
-public partial class WoodenChair : Node3D
+public partial class Chair : Node3D
 {
 	[Export]
 	public string HintText
@@ -24,6 +24,7 @@ public partial class WoodenChair : Node3D
 	public override void _Ready()
 	{
 		_marker = GetNode<Marker3D>("SitPosition");
+		GD.Print(GetNode("/root/Node3D"));
 		_player = GetNode<Player>("/root/Node3D/Player");
 	}
 
@@ -39,6 +40,7 @@ public partial class WoodenChair : Node3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		GD.Print(_player);
 		if (!_player.is_sitting || !Input.IsActionPressed("escape"))
 		{
 			return;

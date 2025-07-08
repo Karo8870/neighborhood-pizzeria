@@ -122,15 +122,4 @@ public partial class Player : CharacterBody3D
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
 	}
-
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if (@event is InputEventMouseMotion mouseMotion && @event.IsPressed())
-		{
-			var from = _camera.ProjectRayOrigin(mouseMotion.Position);
-			var to = from + _camera.ProjectRayNormal(mouseMotion.Position) * 1000;
-
-			var space_state = GetWorld3D().DirectSpaceState;
-		}
-	}
 }

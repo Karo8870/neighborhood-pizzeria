@@ -11,14 +11,12 @@ config_version=5
 [application]
 
 config/name="neighborhood-pizzeria"
-run/main_scene="uid://b8sqwj70btlth"
+run/main_scene="uid://6liv7eb8064y"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
 [autoload]
 
 Global="*res://Global.cs"
-OrderManager="*res://Orders/OrderManager.cs"
-IngredientManager="*res://Ingredients/IngredientManager.cs"
 
 [dotnet]
 

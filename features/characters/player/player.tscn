@@ -1,15 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceuhhhm0y5jhc"]
+[gd_scene load_steps=7 format=3 uid="uid://ceuhhhm0y5jhc"]
 
-[ext_resource type="Script" uid="uid://bn5foq2oygu2e" path="res://features/characters/player/Player.cs" id="1_nqncb"]
-[ext_resource type="Script" uid="uid://1hknwga2tqph" path="res://features/characters/player/RayCast3D.cs" id="2_drb1c"]
-[ext_resource type="Script" path="res://ChairManager.cs" id="3_go8vk"]
+[ext_resource type="Script" uid="uid://bn77w15h2jtft" path="res://features/characters/player/CameraController.cs" id="2_drb1c"]
+[ext_resource type="Script" uid="uid://1hknwga2tqph" path="res://features/characters/player/RayCast.cs" id="2_jolrm"]
+[ext_resource type="Script" uid="uid://do7al0ydka8ls" path="res://features/characters/player/MovementController.cs" id="3_go8vk"]
+[ext_resource type="Script" uid="uid://85wfup0tg2kq" path="res://features/characters/player/PickupController.cs" id="4_8wt1e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-script = ExtResource("1_nqncb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")
@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0.692
 transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, -0.000441015, 7.71081e-11)
 debug_shape_custom_color = Color(1, 0, 0, 1)
 debug_shape_thickness = 5
-script = ExtResource("2_drb1c")
+script = ExtResource("2_jolrm")
 
 [node name="Label" type="Label" parent="Neck/Camera3D/RayCast3D"]
 anchors_preset = 7
@@ -62,4 +62,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ChairManager" type="Node" parent="."]
+
+[node name="CameraController" type="Node" parent="."]
+script = ExtResource("2_drb1c")
+
+[node name="MovementController" type="Node" parent="."]
 script = ExtResource("3_go8vk")
+
+[node name="PickupController" type="Node" parent="."]
+script = ExtResource("4_8wt1e")

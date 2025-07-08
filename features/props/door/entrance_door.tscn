@@ -116,21 +116,6 @@ shadow_mesh = SubResource("ArrayMesh_c6qko")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0f7x2"]
 points = PackedVector3Array(50.6889, 288.498, 3.61836, 5.93446, 154.235, -12.0464, 10.4108, 165.438, -14.2862, 5.93446, 297.472, -12.0464, 50.6889, 286.269, -14.2862, 52.934, 154.235, -12.0464, 8.17495, 163.194, 3.61836, 5.93446, 297.472, 1.38029, 50.6889, 163.194, 3.61836, 52.934, 297.472, -12.0464, 5.93446, 154.235, 1.38029, 8.17495, 288.498, 3.61836, 50.6889, 165.438, -14.2862, 10.4108, 286.269, -14.2862, 50.7592, 290.844, 0.7589, 50.7593, 160.863, 0.758946)
 
-[sub_resource type="Animation" id="Animation_bbuwv"]
-resource_name = "open"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 6.96438),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_25ir8"]
 length = 0.001
 tracks/0/type = "value"
@@ -159,6 +144,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 1.5708, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bbuwv"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 6.96438),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0f7x2"]
