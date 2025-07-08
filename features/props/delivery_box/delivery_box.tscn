@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://drt4uvutqsnyb"]
+
+[ext_resource type="Script" uid="uid://dcliwnigmkyx4" path="res://PickUpObject.cs" id="1_b5lmv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdylp"]
+albedo_color = Color(0, 0.623529, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wdylp"]
+material = SubResource("StandardMaterial3D_wdylp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b5lmv"]
+
+[node name="Node3D" type="Node3D" groups=["DeliveryBox"]]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["DeliveryBox"]]
+mass = 0.001
+script = ExtResource("1_b5lmv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" groups=["DeliveryBox"]]
+transform = Transform3D(0.324501, 0, 0, 0, 0.324501, 0, 0, 0, 0.324501, 0, 0, 0)
+mesh = SubResource("BoxMesh_wdylp")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" groups=["DeliveryBox"]]
+transform = Transform3D(0.326718, 0, 0, 0, 0.326718, 0, 0, 0, 0.326718, 0, 0, 0)
+shape = SubResource("BoxShape3D_b5lmv")

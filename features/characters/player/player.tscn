@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceuhhhm0y5jhc"]
+
+[ext_resource type="Script" uid="uid://bn5foq2oygu2e" path="res://features/characters/player/Player.cs" id="1_nqncb"]
+[ext_resource type="Script" uid="uid://1hknwga2tqph" path="res://features/characters/player/RayCast3D.cs" id="2_drb1c"]
+[ext_resource type="Script" path="res://ChairManager.cs" id="3_go8vk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_nqncb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_4flbx")
+skeleton = NodePath("../..")
+
+[node name="Neck" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.74846e-07, 0, 1.74846e-07, 1, 0, 0.692441, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -8.74228e-08, -1, 0, 2, -4.37114e-08, 0, -0.000441015, 7.71081e-11)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+script = ExtResource("2_drb1c")
+
+[node name="Label" type="Label" parent="Neck/Camera3D/RayCast3D"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -63.0
+offset_right = 20.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Hand" type="Marker3D" parent="Neck/Camera3D"]
+transform = Transform3D(0.996788, 0, 0, 0, 0.996788, 1.74284e-07, 0, -1.74284e-07, 0.996788, 0, -0.000441372, -2.00282)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChairManager" type="Node" parent="."]
+script = ExtResource("3_go8vk")

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://og5ha12syexw"]
+
+[ext_resource type="ArrayMesh" uid="uid://tyhj1sqrpx5p" path="res://features/props/computer/model.obj" id="1_xybl1"]
+[ext_resource type="PackedScene" uid="uid://rbpwefdmco0w" path="res://features/props/computer/computer_screen.tscn" id="2_i5njb"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8cly3"]
+points = PackedVector3Array(-0.114096, -0.0588307, -0.0856498, 0.0431083, 0.42027, 0.0567318, -0.202977, 0.118748, 0.333268, 0.176967, -0.0130749, -0.093177, -0.181067, 0.404803, 0.0418989, 0.103523, 0.413786, 0.184197, -0.191391, -0.00897005, 0.336508, -0.195204, -0.0363406, -0.093177, -0.180219, 0.336808, 0.250451, 0.169195, 0.142014, 0.333268, 0.106683, 0.41288, 0.0443956, 0.169414, -0.0351228, -0.0322124, 0.169631, 0.00935461, 0.325334, -0.18694, 0.395368, 0.18332, 0.108632, 0.342911, 0.256802, 0.0296163, -0.0440635, 0.0386458, -0.202977, 0.0877595, 0.0541772, 0.169195, 0.118797, 0.0774528, -0.18829, -0.0578672, -0.0399652, 0.117939, -0.043678, -0.085473, -0.121657, 0.405477, 0.176478, -0.188416, -0.0133333, 0.318115, -0.0633987, 0.134291, 0.333268, 0.042164, 0.41624, 0.0431877, 0.170841, 0.0157398, 0.341673, 0.103255, 0.420816, 0.138987, -0.0986911, 0.00192128, 0.34022, 0.107599, 0.414656, 0.1314, 0.169195, 0.142014, 0.271228, 0.0278533, 0.00244084, 0.339658, -0.102152, -0.0285692, -0.093177, 0.00539401, 0.350037, 0.249284)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6xxxp"]
+viewport_path = NodePath("MeshInstance3D/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffdwf"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_6xxxp")
+uv1_scale = Vector3(-1, -1, -1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8cly3"]
+material = SubResource("StandardMaterial3D_ffdwf")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6xxxp"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[node name="Computer" type="Node3D"]
+transform = Transform3D(0.998102, 0.060807, -0.00978106, -0.0615886, 0.985435, -0.158511, -2.79397e-09, 0.158813, 0.987309, 0, 0, 0)
+
+[node name="Model" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.14, -9.1244e-08, 2.21074e-08, 8.90715e-08, 4.14, -1.78814e-07, 1.64006e-09, 1.78814e-07, 4.14, 0.0371506, 3.72529e-08, -0.58783)
+mesh = ExtResource("1_xybl1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Model"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_8cly3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.462203, 0.0187441, -0.0237651, 0.0288514, -0.162052, 0.386066, 0.00312426, -1.27652, -0.0493595, -0.0752099, 1.18072, -0.385665)
+mesh = SubResource("PlaneMesh_8cly3")
+
+[node name="SubViewport" type="SubViewport" parent="MeshInstance3D"]
+transparent_bg = true
+render_target_update_mode = 4
+
+[node name="ComputerScreen" parent="MeshInstance3D/SubViewport" instance=ExtResource("2_i5njb")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_6xxxp")
