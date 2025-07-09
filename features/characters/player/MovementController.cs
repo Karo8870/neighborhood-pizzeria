@@ -5,11 +5,14 @@ namespace neighborhoodPizzeria.features.characters.player;
 public partial class MovementController : Node
 {
 	[Export] public float Speed = 5.0f;
-	[Export] public float JumpVelocity = 4.5f;
+	[Export] public float RunningSpeed = 12.0f;
+	[Export] public float JumpVelocity = 8f;
 
 	private CharacterBody3D _player;
 	private Node3D _neck;
 	private Global _global;
+
+	public bool IsSprinting = false;
 
 	public override void _Ready()
 	{
@@ -23,6 +26,15 @@ public partial class MovementController : Node
 		if (!_global.CanMove)
 		{
 			return;
+		}
+
+		if (Input.IsActionJustPressed("sprint"))
+		{
+			IsSprinting = true;
+		}
+		else if (Input.IsActionJustReleased("sprint"))
+		{
+			IsSprinting = false;
 		}
 
 		var velocity = _player.Velocity;
@@ -45,15 +57,17 @@ public partial class MovementController : Node
 		var right = basis.X;
 		var dir = (right * inputDir.X + forward * inputDir.Y).Normalized();
 
+		var currentSpeed = IsSprinting ? RunningSpeed : Speed;
+
 		if (dir != Vector3.Zero)
 		{
-			velocity.X = dir.X * Speed;
-			velocity.Z = dir.Z * Speed;
+			velocity.X = dir.X * currentSpeed;
+			velocity.Z = dir.Z * currentSpeed;
 		}
 		else
 		{
-			velocity.X = Mathf.MoveToward(velocity.X, 0, Speed);
-			velocity.Z = Mathf.MoveToward(velocity.Z, 0, Speed);
+			velocity.X = Mathf.MoveToward(velocity.X, 0, currentSpeed);
+			velocity.Z = Mathf.MoveToward(velocity.Z, 0, currentSpeed);
 		}
 
 		_player.Velocity = velocity;

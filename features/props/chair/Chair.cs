@@ -1,7 +1,8 @@
 using Godot;
 using System;
+using neighborhoodPizzeria.features.characters.player;
 
-namespace neighborhoodPizzeria;
+namespace neighborhoodPizzeria.features.props.chair;
 
 /// <summary>
 /// Example of a 3D object that implements hover and click callbacks.
@@ -11,43 +12,39 @@ public partial class Chair : Node3D
 	[Export]
 	public string HintText
 	{
-		get => _player.is_sitting ? string.Empty : "[Left click] to sit";
+		get => _sittingController.IsSitting ? string.Empty : "[Left click] to sit";
 		private set { }
 	}
 
 	private Marker3D _marker;
 
-	private Player _player;
+	private SittingController _sittingController;
 
 	public string Hint => HintText;
 
 	public override void _Ready()
 	{
 		_marker = GetNode<Marker3D>("SitPosition");
-		GD.Print(GetNode("/root/Node3D"));
-		_player = GetNode<Player>("/root/Node3D/Player");
+		_sittingController = GetNode<SittingController>("/root/Node3D/Player/SittingController");
 	}
 
 	public void OnClick()
 	{
-		if (!_player.is_sitting)
-		{
-			_player.is_sitting = true;
-			_player.SetPhysicsProcess(false);
-			_player.GlobalPosition = _marker.GlobalPosition;
-		}
-	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-		GD.Print(_player);
-		if (!_player.is_sitting || !Input.IsActionPressed("escape"))
+		if (_sittingController.IsSitting)
 		{
 			return;
 		}
 
-		_player.is_sitting = false;
+		_sittingController.Sit(_marker);
+	}
 
-		_player.SetPhysicsProcess(true);
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!_sittingController.IsSitting || !Input.IsActionPressed("escape"))
+		{
+			return;
+		}
+
+		_sittingController.UnSit();
 	}
 }
