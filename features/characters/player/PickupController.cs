@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using neighborhoodPizzeria.scripts;
 
 namespace neighborhoodPizzeria.features.characters.player;
 
@@ -32,19 +33,19 @@ public partial class PickupController : Node
 		var handPos = _hand.GlobalTransform.Origin;
 		try
 		{
-			var rb = picked as RigidBody3D;
-			rb.SetLinearVelocity((handPos - objPos) * PullPower);
+			picked.RigidBody.SetLinearVelocity((handPos - objPos) * PullPower);
 		}
 		catch (NullReferenceException)
 		{
 			// ignore
 		}
 
-		// drop on escape
-		if (Input.IsActionPressed("escape"))
+		if (Input.IsActionJustPressed("secondary_interact"))
 		{
-			picked.GetNode<CollisionShape3D>("CollisionShape3D").Disabled = false;
+			GD.Print(_global.PickedObject);
+			picked.CollisionShape.Disabled = false;
 			_global.PickedObject = null;
+			GD.Print(_global.PickedObject);
 		}
 	}
 }
